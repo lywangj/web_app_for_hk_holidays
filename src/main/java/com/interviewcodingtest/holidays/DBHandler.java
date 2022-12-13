@@ -33,6 +33,47 @@ public class DBHandler {
         }
     }
 
+    static boolean tableExistsSQL(Connection connection, String tableName) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT count(*) "
+                + "FROM information_schema.tables "
+                + "WHERE table_name = ? "
+                + "LIMIT 1;");
+        preparedStatement.setString(1, tableName);
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+        resultSet.next();
+        return resultSet.getInt(1) != 0;
+    }
+
+    public void createHolidayTable() {
+        try {
+
+            Statement statement;
+            statement = connection.createStatement();
+
+            if(tableExistsSQL(connection, "holidays")) {
+                String sql_dropTable = "drop table `holidays`;";
+                statement.executeUpdate(sql_dropTable);
+                System.out.println("Successfully Dropped the old table ... ");
+            }
+
+            String sql_createTable =
+                    "CREATE TABLE `holidays` (\n" +
+                            "  `holiday_id` int(11) NOT NULL AUTO_INCREMENT,\n" +
+                            "  `uid` varchar(45) NOT NULL,\n" +
+                            "  `dtstart` varchar(45) NOT NULL,\n" +
+                            "  `dtend` varchar(45) NOT NULL,\n" +
+                            "  `summary` varchar(80) NOT NULL,\n" +
+                            "  PRIMARY KEY (`holiday_id`)\n" +
+                            ");";
+            statement.executeUpdate(sql_createTable);
+            System.out.println("Successfully Created the holidays table ... ");
+        }
+        catch (Exception exception) {
+            System.out.println(exception);
+        }
+    }
+
     public Connection getConnection() {
         return connection;
     }
@@ -91,11 +132,9 @@ public class DBHandler {
 
         StringBuffer mySql = new StringBuffer(
                 "insert into `holidays` (uid, dtstart, dtend, summary) values (?, ?, ?, ?)");
-        for (int i = 0; i < holidays.size()-1; i++) {
-            mySql.append(", (?, ?, ?, ?)");
-        }
+        mySql.append(", (?, ?, ?, ?)".repeat(Math.max(0, holidays.size() - 1)));
         mySql.append(";");
-        System.out.println(mySql.toString());
+//        System.out.println(mySql.toString());
 //        Statement statement;
 
         try {
@@ -108,7 +147,7 @@ public class DBHandler {
                 statement.setString((4 * i) + 3, holidays.get(i).getDtend());
                 statement.setString((4 * i) + 4, holidays.get(i).getSummary());
             }
-            System.out.println(statement.toString());
+//            System.out.println(statement.toString());
             statement.executeUpdate();
 
 //            resultSet.close();

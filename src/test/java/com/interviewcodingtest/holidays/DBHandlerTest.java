@@ -35,25 +35,30 @@ class DBHandlerTest {
     void testConnectToMySQL() throws IOException, JSONException {
 
         dbHandler = new DBHandler();
-        dbHandler.connectToDB("ts_db");
+        dbHandler.connectToDB("hk_holidays");
 //        dbHandler.updateHolidaysToDB(ts_holidays);
         connection = dbHandler.getConnection();
         try {
             Statement statement;
             statement = connection.createStatement();
 
+//            assertFalse(DBHandler.tableExistsSQL(connection, "holidays"));
+
 //            ResultSet resultSet;
-            String sql_createTable =
-                    "CREATE TABLE `holidays` (\n" +
-                    "  `holiday_id` int(11) NOT NULL AUTO_INCREMENT,\n" +
-                    "  `uid` varchar(45) NOT NULL,\n" +
-                    "  `dtstart` varchar(45) NOT NULL,\n" +
-                    "  `dtend` varchar(45) NOT NULL,\n" +
-                    "  `summary` varchar(80) NOT NULL,\n" +
-                    "  PRIMARY KEY (`holiday_id`)\n" +
-                    ");";
-            int successfulCreatingTable = statement.executeUpdate(sql_createTable);
-            assertEquals(successfulCreatingTable, 0, "ERROR: create table `holidays`");
+            dbHandler.createHolidayTable();
+//            String sql_createTable =
+//                    "CREATE TABLE `holidays` (\n" +
+//                    "  `holiday_id` int(11) NOT NULL AUTO_INCREMENT,\n" +
+//                    "  `uid` varchar(45) NOT NULL,\n" +
+//                    "  `dtstart` varchar(45) NOT NULL,\n" +
+//                    "  `dtend` varchar(45) NOT NULL,\n" +
+//                    "  `summary` varchar(80) NOT NULL,\n" +
+//                    "  PRIMARY KEY (`holiday_id`)\n" +
+//                    ");";
+//            int successfulCreatingTable = statement.executeUpdate(sql_createTable);
+//            assertEquals(successfulCreatingTable, 0, "ERROR: create table `holidays`");
+
+            assertTrue(DBHandler.tableExistsSQL(connection, "holidays"));
 
             dbHandler.updateHolidaysToDB(ts_holidays);
 

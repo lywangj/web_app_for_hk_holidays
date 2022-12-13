@@ -21,6 +21,12 @@ public class JsonHandler {
 //        JSONObject json =
         readJsonFromUrl("https://www.1823.gov.hk/common/ical/en.json");
 //        System.out.println(json.toString());
+
+        System.out.println("Extract " + holidayList.size() + " items from Holiday Json");
+
+        if (holidayList.size() == 0) {
+            throw new IOException("ERROR: No holiday item is found from Json");
+        }
     }
 
     public List<Holiday> getHolidayList(){

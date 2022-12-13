@@ -63,6 +63,7 @@ public class HomeController {
             holidaysFromJson = jsonHandler.getHolidayList();
 
             dbHandler.connectToDB(dbName);
+            dbHandler.createHolidayTable();
 
             dbHandler.updateHolidaysToDB(holidaysFromJson);
 
