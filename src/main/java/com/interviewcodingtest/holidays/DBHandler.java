@@ -12,12 +12,14 @@ public class DBHandler {
     private JsonHandler jsonHandler;
     private List<Holiday> holidays;
     private Connection connection;
+    private String dbName;
 
     public DBHandler() {
     }
 
-    public void connectToDB(String dbName){
+    public void connectToDB(String requestedDbName){
 
+        dbName = requestedDbName;
         String url = "jdbc:mysql://localhost:3306/" + dbName;
         connection = null;
         try {
@@ -33,10 +35,10 @@ public class DBHandler {
         }
     }
 
-    static boolean tableExistsSQL(Connection connection, String tableName) throws SQLException {
+    public boolean tableExistsSQL(Connection connection, String tableName) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement("SELECT count(*) "
                 + "FROM information_schema.tables "
-                + "WHERE table_name = ? "
+                + "WHERE TABLE_SCHEMA='" + dbName + "' AND TABLE_NAME= ? "
                 + "LIMIT 1;");
         preparedStatement.setString(1, tableName);
 
@@ -52,10 +54,12 @@ public class DBHandler {
             statement = connection.createStatement();
 
             if(tableExistsSQL(connection, "holidays")) {
+                System.out.println("checkkkkkkkkkkkkkkkkkkkkkk... ");
                 String sql_dropTable = "drop table `holidays`;";
                 statement.executeUpdate(sql_dropTable);
                 System.out.println("Successfully Dropped the old table ... ");
             }
+
 
             String sql_createTable =
                     "CREATE TABLE `holidays` (\n" +
@@ -158,6 +162,10 @@ public class DBHandler {
             System.out.println(exception);
         }
 
+    }
+
+    public String getDbName() {
+        return dbName;
     }
 }
 //        // read json

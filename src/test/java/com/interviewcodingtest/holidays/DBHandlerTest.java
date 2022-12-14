@@ -20,8 +20,6 @@ class DBHandlerTest {
     DBHandler dbHandler;
     Connection connection;
 
-
-
     @BeforeEach
     void setup() {
 
@@ -36,7 +34,7 @@ class DBHandlerTest {
 
         dbHandler = new DBHandler();
         dbHandler.connectToDB("hk_holidays");
-//        dbHandler.updateHolidaysToDB(ts_holidays);
+//        dbHandler.connectToDB("ts_db");
         connection = dbHandler.getConnection();
         try {
             Statement statement;
@@ -58,7 +56,7 @@ class DBHandlerTest {
 //            int successfulCreatingTable = statement.executeUpdate(sql_createTable);
 //            assertEquals(successfulCreatingTable, 0, "ERROR: create table `holidays`");
 
-            assertTrue(DBHandler.tableExistsSQL(connection, "holidays"));
+            assertTrue(dbHandler.tableExistsSQL(connection, "holidays"));
 
             dbHandler.updateHolidaysToDB(ts_holidays);
 

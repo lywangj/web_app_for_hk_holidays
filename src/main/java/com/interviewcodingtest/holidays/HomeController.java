@@ -3,10 +3,10 @@ package com.interviewcodingtest.holidays;
 //import org.apache.tomcat.util.json.JSONParser;
 //import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-//import org.springframework.ui.Model;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-//import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 //import org.springframework.web.bind.annotation.RequestMapping;
 //import org.springframework.web.bind.annotation.ResponseStatus;
 //import org.springframework.web.servlet.ModelAndView;
@@ -48,8 +48,30 @@ public class HomeController {
 //    private ContactDAO holidayDAO;
 //    private DBHandler dbHandler;
 
+
+//    defaultValue = "test"
+
+//    getdata?StartDate=20210101&EndDate=20210102
+    @GetMapping(path="/filterdata")
+    public String filterData(@RequestParam(name = "StartDate") String startDate,
+                             @RequestParam(name = "EndDate") String endDate, Model model) {
+
+        System.out.println("Filter the data from " + startDate + " to " + endDate);
+
+//        select * from holidays where dtstart>='20221226' and dtend<='20251201';
+
+        String sql = "select * from `holidays` where dtstart>='" + startDate + "' and dtend<='" + endDate + "';";
+
+        List<Holiday> outputHolidays = dbHandler.extractHolidaysFromDB(sql);
+        System.out.println("filterHolidays size : " + outputHolidays.size());
+
+        model.addAttribute("holidays", outputHolidays);
+
+        return "getdata";
+    }
+
     @GetMapping(path="/getdata")
-    public String getData() {
+    public String getData(Model model) {
         System.out.println("Hello");
 
         List<Holiday> holidaysFromJson;
@@ -72,9 +94,13 @@ public class HomeController {
             List<Holiday> outputHolidays = dbHandler.extractHolidaysFromDB(sql);
             System.out.println("outputHolidays size : " + outputHolidays.size());
 
+            model.addAttribute("holidays", outputHolidays);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
         return "getdata";
     }
 
