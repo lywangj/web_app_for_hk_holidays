@@ -8,7 +8,7 @@ Web applications using `Java` `Spring` and `MySQL`
 
 ### Completed Features
 
-Web applications for searching HK holidays from 2021 to 2023
+Web applications for listing and searching HK holidays from 2021 to 2023
 
 - store the HK holidays in database
 - output the holiday list from database
@@ -21,17 +21,16 @@ Web applications for searching HK holidays from 2021 to 2023
 - Create a `hk_holidays` batabase
 - Setup the user and password in  
 
-### Compile & Strat
+### Compile & Start
 
-Complie in the depositry
+1. In Linux or Terminal environment, complie & run this project in the depository where the `mvnw.cmd` located, using Unix shell script of maven.
 
 ```
+PS D:\holidays> ../mvnw package
 PS D:\holidays> ../mvnw spring-boot:run
 
 ```
-
-### 
-
+2. Open a web browser with url `http://localhost:8080/`
 
 ### Test
 
@@ -44,7 +43,9 @@ Utilised framework JUnit to perform the unit testing for parsing Json and implem
 
 ## Work Diary
 
-12 Dec (1st Day)
+### 12 Dec (1st Day)
+
+
 
 - Planned for the project: requested element, app architetecure, framework to use, check-points
 
@@ -70,7 +71,7 @@ Utilised framework JUnit to perform the unit testing for parsing Json and implem
 
 
 
-13 Dec (2nd Day)
+### 13 Dec (2nd Day)
 
 - Implement database `MySQL` with `java.sql`
 
@@ -86,13 +87,18 @@ Utilised framework JUnit to perform the unit testing for parsing Json and implem
 
 - Optimise
 
-14 Dec (3rd Day)
+### 14 Dec (3rd Day)
 
 - Optimise
 
 - Documentation
 
 
-| Categroy | Tasks    | Notes    |
-| :---:   | :---: | :---: |
-| Seconds | 301   | 283   |
+
+| column 1 | column 2 |
+|------------|----------|
+| Planned for the project | <ul><li>value 1</li><li>value 2</li></ul> |
+| value | <ul><li>requested element</li><li>value 2</li></ul> |
+| value | <ul><li>value 1</li><li>value 2</li></ul> |
+| value | <ul><li>value 1</li><li>value 2</li></ul> |
+| value | <ul><li>value 1</li><li>value 2</li></ul> |
