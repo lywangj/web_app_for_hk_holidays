@@ -79,7 +79,7 @@ PS D:\holidays> ./mvnw test
 
 ## Work Diary
 
-### 12 Dec (1st Day)
+### 12th Dec (1st Day)
 
 1. **Planned for the project**: requested element, app architetecure, framework to use, check-points
 
@@ -90,11 +90,11 @@ PS D:\holidays> ./mvnw test
 
 4. **Design basic GUI with `home.html`**
 
-5. **Built a class `HomeController`** utilising `spring` framework to construct web bind
+5. **Built a class `HomeController` utilising `spring` framework to construct web bind**
     - a `GetMapping` for getting the home page 
     - a `GetMapping` for getting data from database as data model
 
-6. **Built a class/model `Holday`** for Java `MVC` design pattern
+6. **Built a class/model `Holday` for Java `MVC` design pattern**
 
 7. **Built a `JsonHandler` class to parse Json file**
     - built the methods to read Json from URL, parse Json, and store all holiday data to memory space as Holiday objects
@@ -102,7 +102,7 @@ PS D:\holidays> ./mvnw test
     - use JUnit testing to ensure the functionality
 > The process follows Test-driven development method. This helps me to break down problem during coding. Once I got stuck by how to correctly parse the Json, instead of compiling and running the entire project on web, the unit testing makes debugging easier and more efficient. 
 
-### 13 Dec (2nd Day)
+### 13th Dec (2nd Day)
 
 1. **Implement database `MySQL` with `java.sql` and `JDBC` driver**
     - Setup `JDBC` driver for MySQL
@@ -124,9 +124,9 @@ PS D:\holidays> ./mvnw test
 
 3. **Optimise Java code**
 
-### 14 Dec (3rd Day)
+### 14th Dec (3rd Day)
 
-1. **Add a Get method** in the class `HomeController` Utilising `springframework` to construct web bind
+1. **Add a Get method in the class `HomeController` Utilising `springframework` to construct web bind**
     - a `GetMapping` for filtering data from database
 > Due to the way to input filtering dates memtioned above, I didn't write any code to prevent invalid filter dates either. Even thought it won't generate errors, invalid inputs will still impact the usability. The perfect solution is to implement an UI to constrain the user input, like a calendar that users can pick up a date for filtering.
 
