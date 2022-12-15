@@ -17,7 +17,6 @@ public class HomeController {
 
     private DBHandler dbHandler;
 
-//    getdata?StartDate=20210101&EndDate=20210102
     @GetMapping(path="/filterdata")
     public String filterData(@RequestParam(name = "StartDate") String startDate,
                              @RequestParam(name = "EndDate") String endDate, Model model) {
@@ -29,7 +28,7 @@ public class HomeController {
         List<Holiday> outputHolidays = dbHandler.extractHolidaysFromDB(sql);
         System.out.println("Select filtered Holidays size : " + outputHolidays.size());
 
-        // Set models to the filtered data
+        // Set models with the filtered data
         model.addAttribute("holidays", outputHolidays);
         return "home";
     }
@@ -56,7 +55,7 @@ public class HomeController {
             List<Holiday> outputHolidays = dbHandler.extractHolidaysFromDB(sql);
             System.out.println("Select output Holidays size : " + outputHolidays.size());
 
-            // Set models to the selected data
+            // Set models with the selected data
             model.addAttribute("holidays", outputHolidays);
 
         } catch (IOException e) {

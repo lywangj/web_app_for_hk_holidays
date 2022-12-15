@@ -26,9 +26,7 @@ public class DBHandler {
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-//            connection = DriverManager.getConnection( url, "root", "og21893");
             connection = DriverManager.getConnection( url, properties);
-
             System.out.println("Connecting to database ... ");
         }
         catch (Exception exception) {
@@ -49,8 +47,8 @@ public class DBHandler {
     }
 
     public void createHolidayTable() {
-        try {
 
+        try {
             Statement statement;
             statement = connection.createStatement();
 
@@ -112,11 +110,9 @@ public class DBHandler {
                 dtend = resultSet.getString("dtend");
                 summary = resultSet.getString("summary");
                 output_holidays.add(new Holiday(i++, uid, dtstart, dtend, summary));
-//                i++;
             }
             resultSet.close();
             statement.close();
-//            connection.close();
         }
         catch (Exception exception) {
             System.out.println(exception);
@@ -145,18 +141,12 @@ public class DBHandler {
             }
             statement.executeUpdate();
 
-//            resultSet.close();
             statement.close();
-//            connection.close();
         }
         catch (Exception exception) {
             System.out.println(exception);
         }
 
     }
-
-//    public String getDbName() {
-//        return dbName;
-//    }
 
 }

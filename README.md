@@ -83,20 +83,20 @@ PS D:\holidays> ./mvnw test
 
 1. **Planned for the project**: requested element, app architetecure, framework to use, check-points
 
-**2. Setup architecture**
+2. **Setup architecture**
 > It was the first project that I use Java for web app and DB implementation, but I have done another project with similar functionality in JavaScript. In this project, I learnt about Java MVC design pattern and managed to set the plan and architecture.
 
-- Create a new `Spring-boot` project for web app
+3. **Create a new `Spring-boot` project for web app**
 
-- Design basic GUI with `home.html`
+4. **Design basic GUI with `home.html`**
 
-- Built a class `HomeController` Utilising `spring` framework to construct web bind
+5. **Built a class `HomeController`** utilising `spring` framework to construct web bind
     - a `GetMapping` for getting the home page 
     - a `GetMapping` for getting data from database as data model
 
-- Built a class `Holday` for Java `MVC` design pattern
+6. **Built a class/model `Holday`** for Java `MVC` design pattern
 
-- Built a `JsonHandler` class to parse Json file
+7. **Built a `JsonHandler` class to parse Json file**
     - built the methods to read Json from URL, parse Json, and store all holiday data to memory space as Holiday objects
     - setup `org.json` dependency in `pom.xml`
     - use JUnit testing to ensure the functionality
@@ -104,7 +104,7 @@ PS D:\holidays> ./mvnw test
 
 ### 13 Dec (2nd Day)
 
-- Implement database `MySQL` with `java.sql` and `JDBC` driver
+1. **Implement database `MySQL` with `java.sql` and `JDBC` driver**
     - Setup `JDBC` driver for MySQL
     - Setup methods data manipulation 
         - Create a new table in DB
@@ -117,29 +117,29 @@ PS D:\holidays> ./mvnw test
 
 > For setting up JDBC driver using Java, I got some problem at the beginning. I searched online and check several ways that others suggested, and finally figured out adding a JAR file to the library.
 
-- Desined UI using CSS stylesheet
+2. **Desined UI using CSS stylesheet**
 > For UI design, I only made the minimum elements work and leave some work due to the time limitation. In future work, the web design could be better. For example, in the case of larger amount of data, the output list can be seperated into several pages to improve the UI design.
 
 > Another point that needs to be improved is the date filter. A better approach is with an actual calendar input rather than the current one that allows user to manually type dates. It could avoid the typing error by the users and invalid date formats, like '00210101' or '2021.1.1'.
 
-- Optimise Java code
+3. **Optimise Java code**
 
 ### 14 Dec (3rd Day)
 
-- Built a class `HomeController` Utilising `springframework` to construct web bind
+1. **Add a Get method** in the class `HomeController` Utilising `springframework` to construct web bind
     - a `GetMapping` for filtering data from database
 > Due to the way to input filtering dates memtioned above, I didn't write any code to prevent invalid filter dates either. Even thought it won't generate errors, invalid inputs will still impact the usability. The perfect solution is to implement an UI to constrain the user input, like a calendar that users can pick up a date for filtering.
 
-- Test the Controller for web app
+2. **Test the Controller for web app**
 > In this project, I didn't complete enough tests due to time limitation. The test already implemented is to ensure the controller is generated normally by springframework.
 
 > In future work, some unit testing could be performed to test the functionality for each getmapping or postmapping used in MVC. Integration testing could also used to test modelling various situations, like the operations by users.
 
 > In this project, Only the basic using cases are considered due to time limitation. Some extreme cases could be considered for an actual system design, like multiple users, maximum length of holiday list, maximum length of holiday summary etc.
 
-- Optimise code
+3. **Optimise code**
 
-- Documentation
+4. **Documentation**
 
 ---
 ### Future Work
@@ -150,12 +150,3 @@ PS D:\holidays> ./mvnw test
 
 
 Thank you
-
-
-| column 1 | column 2 |
-|------------|----------|
-| Planned for the project | <ul><li>value 1</li><li>value 2</li></ul> |
-| value | <ul><li>requested element</li><li>value 2</li></ul> |
-| value | <ul><li>value 1</li><li>value 2</li></ul> |
-| value | <ul><li>value 1</li><li>value 2</li></ul> |
-| value | <ul><li>value 1</li><li>value 2</li></ul> |
