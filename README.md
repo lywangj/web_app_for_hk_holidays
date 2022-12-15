@@ -9,9 +9,9 @@ A Web application using `Java` `Spring` Framework and `MySQL` database, followin
 ### Completed Features
 
 A Web application for listing and searching HK holidays from 2021 to 2023<br>
-&#9745; store the HK holidays in database <br>
-&#9745; output the holiday list from database<br>
-&#9745; filter & re-output the holiday list from database
+&#9745; Store the HK holidays in database <br>
+&#9745; Output the holiday list from database<br>
+&#9745; Filter & re-output the holiday list from database
 
 <img src="pic/2022-12-15_001124.png" width="720">
 
