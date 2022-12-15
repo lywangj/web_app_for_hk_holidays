@@ -1,30 +1,49 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Coding Assessment - Shoalter Automation</title>
 </head>
 <body>
-<!--<p th:text="'This is the text.' + ${uid} + ' ' + ${dtstart} + ' ' + ${dtend} + ' ' + ${summary}">-->
+<div>
+    <h1>Li-Yun Wang</h1>
+</div>
 
-
-<form id="msgForm" action="/getdata" method="get">
+<form align="center" id="getdata" action="/getdata" method="get">
     <button>Get Data</button>
 </form>
-<!--&lt;!&ndash;<form method="get" href="${pageContext.servletContext.contextPath}/projects">&ndash;&gt;-->
-<!--    <button href="${pageContext.servletContext.contextPath}/projects">Enter</button>-->
-<!--</form>-->
-<!--</form>-->
 
-<!--<form id="msgForm" action="">-->
-<!--&lt;!&ndash;    <input type="text" name="user" placeholder="Enter name...">&ndash;&gt;-->
-<!--&lt;!&ndash;    <input type="text" name="msg" placeholder="Enter message...">&ndash;&gt;-->
-<!--    <button>Enter</button>-->
-<!--</form>-->
-<!--<div id="messages">-->
-<!--<form>-->
+<form align="center" id="period" action="/filterdata" method="get">
+    <input type="text" name="StartDate" placeholder="Start Date 20210101">
+    <input type="text" name="EndDate" placeholder="End Date 20231231">
+    <button>Search</button>
+</form>
 
-<!--    <div><input query ></div>-->
-<!--</form>-->
+<div align="center">
+
+    <table>
+        <thead>
+        <tr border="1">
+            <th> UID </th>
+            <th> Start Date </th>
+            <th> End Date </th>
+            <th> Summary </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${holidays == null OR holidays.empty}">
+            <td colspan="2"> Press "Get Data" Button </td>
+        </tr>
+        <tr th:each="holiday : ${holidays}">
+            <td><span th:text="${holiday.uid}">  </span></td>
+            <td><span th:text="${holiday.dtstart}">  </span></td>
+            <td><span th:text="${holiday.dtend}">  </span></td>
+            <td><span th:text="${holiday.summary}">  </span></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

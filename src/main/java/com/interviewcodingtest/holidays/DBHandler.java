@@ -2,31 +2,32 @@ package com.interviewcodingtest.holidays;
 
 import com.interviewcodingtest.holidays.model.Holiday;
 
-import java.io.IOException;
+import java.util.Properties;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DBHandler {
 
-    private JsonHandler jsonHandler;
-    private List<Holiday> holidays;
     private Connection connection;
     private String dbName;
 
-    public DBHandler() {
-    }
+    public DBHandler() {}
 
     public void connectToDB(String requestedDbName){
+
+        Properties properties = new Properties( );
+        properties.put( "user", "root" );              // input your username
+        properties.put( "password", "og21893" );       // input your password
 
         dbName = requestedDbName;
         String url = "jdbc:mysql://localhost:3306/" + dbName;
         connection = null;
+
         try {
-            // below two lines are used for connectivity.
             Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection(
-                    url,"root", "og21893");
+//            connection = DriverManager.getConnection( url, "root", "og21893");
+            connection = DriverManager.getConnection( url, properties);
 
             System.out.println("Connecting to database ... ");
         }
@@ -53,13 +54,12 @@ public class DBHandler {
             Statement statement;
             statement = connection.createStatement();
 
+            // if the table already exists in database, then drop this table
             if(tableExistsSQL(connection, "holidays")) {
-                System.out.println("checkkkkkkkkkkkkkkkkkkkkkk... ");
                 String sql_dropTable = "drop table `holidays`;";
                 statement.executeUpdate(sql_dropTable);
                 System.out.println("Successfully Dropped the old table ... ");
             }
-
 
             String sql_createTable =
                     "CREATE TABLE `holidays` (\n" +
@@ -84,7 +84,6 @@ public class DBHandler {
 
     public void closeConnection() {
         try {
-            // below two lines are used for connectivity.
             connection.close();
             System.out.println("Close connection to database ... ");
         }
@@ -99,26 +98,21 @@ public class DBHandler {
         // Example. sql = "select * from holidays;"
 
         List<Holiday> output_holidays = new ArrayList<>();
-
         try {
             Statement statement;
             statement = connection.createStatement();
             ResultSet resultSet;
             resultSet = statement.executeQuery(sql);
-            System.out.println(resultSet.toString());
-            String uid;
-            String dtstart;
-            String dtend;
-            String summary;
-            int i = 0;
+
+            int i = 1;
             while (resultSet.next()) {
+                String uid, dtstart, dtend, summary;
                 uid = resultSet.getString("uid");
                 dtstart = resultSet.getString("dtstart");
                 dtend = resultSet.getString("dtend");
                 summary = resultSet.getString("summary");
-                System.out.println("Uid : " + uid + " Summary : " + summary);
-                output_holidays.add(new Holiday(i, uid, dtstart, dtend, summary));
-                i++;
+                output_holidays.add(new Holiday(i++, uid, dtstart, dtend, summary));
+//                i++;
             }
             resultSet.close();
             statement.close();
@@ -134,15 +128,13 @@ public class DBHandler {
 
     public void updateHolidaysToDB(List<Holiday> holidays) {
 
+        // insert multiple data rows to table
         StringBuffer mySql = new StringBuffer(
                 "insert into `holidays` (uid, dtstart, dtend, summary) values (?, ?, ?, ?)");
         mySql.append(", (?, ?, ?, ?)".repeat(Math.max(0, holidays.size() - 1)));
         mySql.append(";");
-//        System.out.println(mySql.toString());
-//        Statement statement;
 
         try {
-
             PreparedStatement statement = connection.prepareStatement(mySql.toString());
 
             for (int i = 0; i < holidays.size(); i++) {
@@ -151,7 +143,6 @@ public class DBHandler {
                 statement.setString((4 * i) + 3, holidays.get(i).getDtend());
                 statement.setString((4 * i) + 4, holidays.get(i).getSummary());
             }
-//            System.out.println(statement.toString());
             statement.executeUpdate();
 
 //            resultSet.close();
@@ -164,70 +155,8 @@ public class DBHandler {
 
     }
 
-    public String getDbName() {
-        return dbName;
-    }
-}
-//        // read json
-//        try {
-//            jsonHandler = new JsonHandler();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        holidays = jsonHandler.getHolidayList();
-
-        // connect to database
-//        connection = null;
-//        try {
-//            // below two lines are used for connectivity.
-//            Class.forName("com.mysql.cj.jdbc.Driver");
-//            connection = DriverManager.getConnection(
-//                    "jdbc:mysql://localhost:3306/hk_holidays",
-//                    "root", "og21893");
-//
-//            System.out.println("Connecting to database ... ");
-
-//            connectToDB();
-//
-//            // mydb is database
-//            // mydbuser is name of database
-//            // mydbuser is password of database
-//
-//            Statement statement;
-//            statement = connection.createStatement();
-//            ResultSet resultSet;
-//            resultSet = statement.executeQuery(
-//                    "select * from WHERE holiday_id=0");
-//            System.out.println(resultSet.toString());
-//            String uid;
-//            String summary;
-//            while (resultSet.next()) {
-//                uid = resultSet.getString("uid");
-//                summary = resultSet.getString("summary").trim();
-//                System.out.println("Uid : " + uid
-//                        + " Summary : " + summary);
-//            }
-//            resultSet.close();
-//            statement.close();
-////            connection.close();
-//        }
-//        catch (Exception exception) {
-//            System.out.println(exception);
-//        }
-
-
-//
-//
-//        // store holiday list in database
-//        for (Holiday newHoliday : holidays) {
-//            holidayDAO.saveOrUpdate(newHoliday);
-//        }
-//
-//        // retrieve holiday list from database
-//        List<Holiday> listContact = holidayDAO.list();
-
-
+//    public String getDbName() {
+//        return dbName;
 //    }
 
-
-
+}

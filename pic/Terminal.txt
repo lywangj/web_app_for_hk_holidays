@@ -1,0 +1,8 @@
+Extract 51 items in total from Holiday Json
+Successfully pared the Json file
+Connecting to database ...
+Successfully Created the holidays table ...
+Select output Holidays size : 51
+Received a get request with Filtering the data from 20221201 to 20221231
+Select filtered Holidays size : 2
+

@@ -2,7 +2,6 @@ package com.interviewcodingtest.holidays;
 
 import com.interviewcodingtest.holidays.model.Holiday;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.*;
@@ -16,16 +15,16 @@ public class JsonHandler {
 
     private static List<Holiday> holidayList;
 
-
     public JsonHandler() throws IOException {
-//        JSONObject json =
-        readJsonFromUrl("https://www.1823.gov.hk/common/ical/en.json");
-//        System.out.println(json.toString());
 
-        System.out.println("Extract " + holidayList.size() + " items from Holiday Json");
+        System.out.println("Start reading HK Holiday Json file ... ");
+        readJsonFromUrl("https://www.1823.gov.hk/common/ical/en.json");
+        System.out.println("Extract " + holidayList.size() + " items in total from Holiday Json");
 
         if (holidayList.size() == 0) {
             throw new IOException("ERROR: No holiday item is found from Json");
+        }else {
+            System.out.println("Successfully pared the Json file");
         }
     }
 
@@ -43,11 +42,13 @@ public class JsonHandler {
     }
 
     public static void readAllJson(JSONObject json) {
+
+        holidayList = new ArrayList<>();
+
         JSONArray arr = json.getJSONArray("vcalendar");
         JSONArray events = arr.getJSONObject(0).getJSONArray("vevent");
-        int num = events.length();
-        ArrayList<Holiday> tmpArrayList = new ArrayList<>();
-        int id = 0;
+
+        int num = events.length(), id = 1;
         for (int i=0; i<num; ++i) {
             String currUid = events.getJSONObject(i).getString("uid");
             String currSummary = events.getJSONObject(i).getString("summary");
@@ -55,23 +56,20 @@ public class JsonHandler {
             String currDtstart = currDtstartArray.getString(0);
             JSONArray currDtendArray = events.getJSONObject(i).getJSONArray("dtend");
             String currDtend = currDtendArray.getString(0);
-            System.out.println(currUid + " " + currDtstart + " " + currDtend + " " + currSummary);
-            tmpArrayList.add(new Holiday(id, currUid, currDtstart, currDtend, currSummary));
+
+            // add a new Holiday object to list
+            holidayList.add(new Holiday(id, currUid, currDtstart, currDtend, currSummary));
         }
-        holidayList = tmpArrayList;
     }
 
     public static void readJsonFromUrl(String url) throws IOException {
         InputStream is = new URL(url).openStream();
         try {
             BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
-            System.out.println("check1");
             String jsonText = readAll(rd);
-//            System.out.println(jsonText.substring(1,10));
             JSONObject json = new JSONObject(jsonText.substring(1));
+            // parse all the Holiday item in Json
             readAllJson(json);
-//            System.out.println("check2");
-//            return json;
         } finally {
             is.close();
         }

@@ -23,41 +23,41 @@ public class Holiday {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+//    public void setId(int id) {
+//        this.id = id;
+//    }
 
     public String getUid() {
         return uid;
     }
 
-    public void setUid(String uid) {
-        this.uid = uid;
-    }
+//    public void setUid(String uid) {
+//        this.uid = uid;
+//    }
 
     public String getSummary() {
         return summary;
     }
 
-    public void setSummary(String summary) {
-        this.summary = summary;
-    }
+//    public void setSummary(String summary) {
+//        this.summary = summary;
+//    }
 
     public String getDtstart() {
         return dtstart;
     }
 
-    public void setDtstart(String dtstart) {
-        this.dtstart = dtstart;
-    }
+//    public void setDtstart(String dtstart) {
+//        this.dtstart = dtstart;
+//    }
 
     public String getDtend() {
         return dtend;
     }
 
-    public void setDtend(String dtend) {
-        this.dtend = dtend;
-    }
+//    public void setDtend(String dtend) {
+//        this.dtend = dtend;
+//    }
 
     @Override
     public String toString() {
@@ -65,6 +65,5 @@ public class Holiday {
                 "Holiday[uid=%s, dtstart='%s', dtend='%s', summary='%s']",
                 uid, dtstart, dtend, summary);
     }
-
 
 }
