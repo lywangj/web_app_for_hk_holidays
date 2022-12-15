@@ -17,8 +17,8 @@ public class DBHandler {
     public void connectToDB(String requestedDbName){
 
         Properties properties = new Properties( );
-        properties.put( "user", "root" );              // input your username
-        properties.put( "password", "og21893" );       // input your password
+        properties.put( "user", "xxx" );              // xxx: input your username
+        properties.put( "password", "ooo" );          // ooo: input your password
 
         dbName = requestedDbName;
         String url = "jdbc:mysql://localhost:3306/" + dbName;
